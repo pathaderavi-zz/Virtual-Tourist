@@ -12,6 +12,8 @@
 		409E3D8C20608F5F0050C2F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 409E3D8A20608F5F0050C2F6 /* Main.storyboard */; };
 		409E3D8E20608F5F0050C2F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 409E3D8D20608F5F0050C2F6 /* Assets.xcassets */; };
 		409E3D9120608F5F0050C2F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 409E3D8F20608F5F0050C2F6 /* LaunchScreen.storyboard */; };
+		40DBED422060B2BD009E17AF /* Pin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40DBED402060B2BD009E17AF /* Pin.xcdatamodeld */; };
+		40DBED4420616CB4009E17AF /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DBED4320616CB4009E17AF /* DataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		409E3D8D20608F5F0050C2F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		409E3D9020608F5F0050C2F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		409E3D9220608F5F0050C2F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40DBED412060B2BD009E17AF /* Pin.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pin.xcdatamodel; sourceTree = "<group>"; };
+		40DBED4320616CB4009E17AF /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,7 @@
 		409E3D8520608F5F0050C2F6 /* Virtual Tourist */ = {
 			isa = PBXGroup;
 			children = (
+				40DBED3F2060B28A009E17AF /* Model */,
 				409E3D8620608F5F0050C2F6 /* AppDelegate.swift */,
 				409E3D8820608F5F0050C2F6 /* ViewController.swift */,
 				409E3D8A20608F5F0050C2F6 /* Main.storyboard */,
@@ -62,6 +67,15 @@
 				409E3D9220608F5F0050C2F6 /* Info.plist */,
 			);
 			path = "Virtual Tourist";
+			sourceTree = "<group>";
+		};
+		40DBED3F2060B28A009E17AF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				40DBED402060B2BD009E17AF /* Pin.xcdatamodeld */,
+				40DBED4320616CB4009E17AF /* DataController.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +151,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				409E3D8920608F5F0050C2F6 /* ViewController.swift in Sources */,
+				40DBED4420616CB4009E17AF /* DataController.swift in Sources */,
+				40DBED422060B2BD009E17AF /* Pin.xcdatamodeld in Sources */,
 				409E3D8720608F5F0050C2F6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,6 +338,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		40DBED402060B2BD009E17AF /* Pin.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				40DBED412060B2BD009E17AF /* Pin.xcdatamodel */,
+			);
+			currentVersion = 40DBED412060B2BD009E17AF /* Pin.xcdatamodel */;
+			path = Pin.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 409E3D7B20608F5F0050C2F6 /* Project object */;
 }

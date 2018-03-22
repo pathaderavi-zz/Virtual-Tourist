@@ -12,10 +12,16 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    let dataController = DataController(modelName:"Pin")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        dataController.load()
+        
+        let navigationController = window?.rootViewController as! UINavigationController
+        let touristController = navigationController.topViewController as! ViewController
+        touristController.dataController = dataController
         return true
     }
 
