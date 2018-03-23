@@ -80,7 +80,7 @@ class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsContr
             self.selectedPin.longitude = coordinates.longitude
             
             try? self.dataController.viewContext.save()
-            
+            self.allPins.append(self.selectedPin)
             DispatchQueue.main.async {
                 self.mapView.addAnnotation(annotation)
             }
@@ -126,9 +126,9 @@ class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsContr
         pinView!.canShowCallout = false
         return pinView
     }
- 
+    var toDelete:Bool = false
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
+        if toDelete{
         let selectedIndex = allPins.index(where:{
             $0.longitude == view.annotation?.coordinate.longitude && $0.lattitude == view.annotation?.coordinate.latitude
         })
@@ -138,7 +138,22 @@ class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsContr
         try? dataController.viewContext.save()
         self.mapView.removeAnnotation(view.annotation!)
         mapView.deselectAnnotation(view.annotation, animated: true)
-        
+        }else{
+            mapView.deselectAnnotation(view.annotation, animated: true)
+            latt = view.annotation?.coordinate.latitude
+            long = view.annotation?.coordinate.longitude
+            try? performSegue(withIdentifier: "PhotosView", sender: self)
+        }
+    }
+    var latt:Double!
+    var long:Double!
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier! == "PhotosView"{
+            if let photosController = segue.destination as? PhotosViewController{
+                photosController.lattitude = latt
+                photosController.longitude = long
+            }
+        }
     }
   
 }
