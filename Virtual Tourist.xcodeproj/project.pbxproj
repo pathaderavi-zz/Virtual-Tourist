@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		40418A8E20644E6800D8B451 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40418A8D20644E6800D8B451 /* PhotosViewController.swift */; };
+		4094CF632064B28900CE0FE4 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4094CF622064B28900CE0FE4 /* PhotoCell.swift */; };
 		409E3D8720608F5F0050C2F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409E3D8620608F5F0050C2F6 /* AppDelegate.swift */; };
 		409E3D8920608F5F0050C2F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409E3D8820608F5F0050C2F6 /* ViewController.swift */; };
 		409E3D8C20608F5F0050C2F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 409E3D8A20608F5F0050C2F6 /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		40418A8D20644E6800D8B451 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		4094CF622064B28900CE0FE4 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		409E3D8320608F5F0050C2F6 /* Virtual Tourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Virtual Tourist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		409E3D8620608F5F0050C2F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		409E3D8820608F5F0050C2F6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		40E6371720645D6200213326 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4094CF622064B28900CE0FE4 /* PhotoCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				40DBED4420616CB4009E17AF /* DataController.swift in Sources */,
 				40DBED422060B2BD009E17AF /* Pin.xcdatamodeld in Sources */,
 				409E3D8720608F5F0050C2F6 /* AppDelegate.swift in Sources */,
+				4094CF632064B28900CE0FE4 /* PhotoCell.swift in Sources */,
 				40418A8E20644E6800D8B451 /* PhotosViewController.swift in Sources */,
 				40E6371C20648A7700213326 /* Requests.swift in Sources */,
 				40E63719206484C900213326 /* Constants.swift in Sources */,

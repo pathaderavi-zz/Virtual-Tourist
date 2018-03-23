@@ -71,13 +71,33 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Ijq-ZI-cqP">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="Ijq-ZI-cqP" customClass="PhotoCell" customModule="Virtual_Tourist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="114" height="97"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="114" height="97"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bM3-bt-ZOC">
+                                                    <rect key="frame" x="0.0" y="0.0" width="114" height="97"/>
+                                                </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="zKl-J8-Ui5">
+                                                    <rect key="frame" x="39" y="30" width="37" height="37"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </activityIndicatorView>
+                                            </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="bM3-bt-ZOC" firstAttribute="leading" secondItem="Ijq-ZI-cqP" secondAttribute="leading" id="dIH-Km-CjX"/>
+                                            <constraint firstAttribute="bottom" secondItem="bM3-bt-ZOC" secondAttribute="bottom" id="eyw-x6-ni6"/>
+                                            <constraint firstAttribute="trailing" secondItem="bM3-bt-ZOC" secondAttribute="trailing" id="sGn-3K-0zW"/>
+                                            <constraint firstItem="bM3-bt-ZOC" firstAttribute="top" secondItem="Ijq-ZI-cqP" secondAttribute="top" id="yTC-RD-Xp0"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="bM3-bt-ZOC" id="Ehy-R2-DEv"/>
+                                            <outlet property="loadingIndicator" destination="zKl-J8-Ui5" id="S42-Lq-bMg"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -102,6 +122,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="bnS-mh-aOT"/>
                     <connections>
+                        <outlet property="collectionView" destination="dLP-iX-ouV" id="I2f-7M-9Bu"/>
+                        <outlet property="flowLayout" destination="8nf-eB-w17" id="D0o-Tr-eN0"/>
                         <outlet property="mapViewPhotos" destination="fDb-Vc-DkC" id="C3c-CN-dVB"/>
                     </connections>
                 </viewController>

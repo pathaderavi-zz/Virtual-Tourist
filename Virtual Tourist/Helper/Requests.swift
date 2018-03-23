@@ -63,7 +63,20 @@ func getImages(lattitude:Double,longitude:Double,completionHandler:@escaping(_ s
     }
     task.resume()
 }
-
+func downloadImage(image:String,completionHandler:@escaping(_ success:Bool?,_ imageData:Data?) -> Void){
+    let session = URLSession.shared
+    let imageUrl = NSURL(string:image)
+    let request: NSURLRequest = NSURLRequest(url:imageUrl! as URL)
+    
+    let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+        if data == nil {
+            completionHandler(false,nil)
+        }else{
+            completionHandler(true,data)
+        }
+    }
+    task.resume()
+}
 func createUrlFromParameters(parameters:[String:Any])->URL{
     var components = URLComponents()
     components.scheme = Constants.FlickrUrl.Scheme

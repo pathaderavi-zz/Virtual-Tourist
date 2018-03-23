@@ -9,25 +9,36 @@
 import UIKit
 import MapKit
 
-class PhotosViewController:UIViewController,MKMapViewDelegate{
+class PhotosViewController:UIViewController,MKMapViewDelegate, UICollectionViewDelegate,UICollectionViewDataSource{
     var longitude:Double!
     var lattitude:Double!
-    
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var mapViewPhotos: MKMapView!
-    var allPics:[String]!
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    
+    var allPics = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureMapView()
+        let space:CGFloat = 3.0
+        let dimension = (view.frame.size.width - (2 * space)) / 3.0
         
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
+        flowLayout.itemSize = CGSize(width: dimension, height: dimension)
+        configureMapView()
         DispatchQueue.global(qos: .userInitiated).async {
             getImages(lattitude: self.lattitude, longitude: self.longitude){ (status,results) in
                 if status{
                     self.allPics = results
+                    DispatchQueue.main.async {
+                        self.collectionView.delegate = self
+                        self.collectionView.dataSource = self
+                        self.collectionView.reloadData()
+                    }
+                    
                 }
             }
         }
-        
-        
     }
 }
 
@@ -41,5 +52,35 @@ extension PhotosViewController{
         annotation.coordinate = location
         self.mapViewPhotos.addAnnotation(annotation)
         mapViewPhotos.isUserInteractionEnabled = false
+    }
+}
+
+extension PhotosViewController{
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let url = allPics[indexPath.row]
+      
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
+        cell.imageView.image = nil
+        DispatchQueue.global(qos: .userInitiated).async {
+            downloadImage(image: url) { (success, data) in
+                DispatchQueue.main.async {
+                    if success!{
+                        cell.imageView.image = UIImage(data:data!)
+                        cell.loadingIndicator.stopAnimating()
+                    }
+                }
+                
+            }
+            
+        }
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return allPics.count
     }
 }
