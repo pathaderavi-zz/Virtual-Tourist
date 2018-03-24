@@ -31,7 +31,7 @@ class Constants{
     
     struct APIValues{
         static let SearchMethod = "flickr.photos.search"
-        static let API_KEY_HERE = "df4ffbf6eb1367ce9bb40aba468602cc"
+        static let API_KEY_HERE = "309b44c81c2e03ee56a8f8013059c4cc"
         static let Radius_Value = "20"
         static let Radius_Unit_Value = "mi"
         static let Extras_Value = "url_m"
@@ -45,7 +45,7 @@ class Constants{
     }
     
     struct ResponseValues{
-    
+        
     }
 }
 

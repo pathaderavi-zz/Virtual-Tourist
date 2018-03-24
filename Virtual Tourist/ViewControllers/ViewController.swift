@@ -10,7 +10,18 @@ import UIKit
 import MapKit
 import CoreData
 class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsControllerDelegate{
-   
+    var deleteMode:Bool = false
+    @IBAction func editButton(_ sender: Any) {
+        bottomToolbar.isHidden = !bottomToolbar.isHidden
+        if !bottomToolbar.isHidden{
+            mapView.frame.origin.y =   mapView.frame.origin.y - bottomToolbar.frame.height
+            deleteMode = true
+        }else{
+            mapView.frame.origin.y = mapView.frame.origin.y + bottomToolbar.frame.height
+            deleteMode = false
+        }
+    }
+    @IBOutlet weak var bottomToolbar: UIToolbar!
     var dataController:DataController!
     var selectedPin:Pin!
     var fetchedResultsController: NSFetchedResultsController<Pin>!
@@ -18,7 +29,7 @@ class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsContr
     var allPins:[Pin]!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-  
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -26,9 +37,7 @@ class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsContr
         fetchedResultsController = nil
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    fileprivate func fetchResults() {
         let fetchRequest:NSFetchRequest<Pin> = Pin.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key:"lattitude",ascending:false)]
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -39,6 +48,12 @@ class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsContr
         }catch{
             fatalError("Cannot fetch")
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        bottomToolbar.isHidden = true
+        fetchResults()
         
         mapView.delegate = self
         let longPress = UILongPressGestureRecognizer(target:self , action: #selector(addAnnotation(pressed:)))
@@ -64,48 +79,48 @@ class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsContr
                 self.mapView.delegate = self
             }
         }
-
+        
     }
     
     @objc func addAnnotation(pressed : UILongPressGestureRecognizer){
         DispatchQueue.global(qos: .userInitiated).async {
             
-        if pressed.state == .began {
-            let location = pressed.location(in: self.mapView)
-            let coordinates = self.mapView.convert(location, toCoordinateFrom: self.mapView)
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinates
-            self.selectedPin = Pin(context:self.dataController.viewContext)
-            self.selectedPin.lattitude = coordinates.latitude
-            self.selectedPin.longitude = coordinates.longitude
-            
-            try? self.dataController.viewContext.save()
-            self.allPins.append(self.selectedPin)
-            DispatchQueue.main.async {
-                self.mapView.addAnnotation(annotation)
-            }
-      
-//            let name = CLGeocoder()
-//            let loc = CLLocation(latitude: coordinates.latitude,longitude:coordinates.longitude)
-//            name.reverseGeocodeLocation(loc, completionHandler: { (placemarks, error) in
-//                var placemark: CLPlacemark!
-//                placemark = placemarks?[0]
-//                var placeName: String!
-//                if let locName = placemark.addressDictionary!["Name"] as? NSString {
-//                    placeName = locName as String!
-//                    print(placeName)
-//                }
-//
-//                if let cityName = placemark.addressDictionary!["City"] as? NSString {
-//                    placeName = placeName+" "+(cityName as String)
-//                    print(placeName)
-//                 }
-//                annotation.title = placeName
-//
-//
-//            })
-//
-        
+            if pressed.state == .began && !self.deleteMode{
+                let location = pressed.location(in: self.mapView)
+                let coordinates = self.mapView.convert(location, toCoordinateFrom: self.mapView)
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = coordinates
+                self.selectedPin = Pin(context:self.dataController.viewContext)
+                self.selectedPin.lattitude = coordinates.latitude
+                self.selectedPin.longitude = coordinates.longitude
+                
+                try? self.dataController.viewContext.save()
+                self.allPins.append(self.selectedPin)
+                DispatchQueue.main.async {
+                    self.mapView.addAnnotation(annotation)
+                }
+                
+                //            let name = CLGeocoder()
+                //            let loc = CLLocation(latitude: coordinates.latitude,longitude:coordinates.longitude)
+                //            name.reverseGeocodeLocation(loc, completionHandler: { (placemarks, error) in
+                //                var placemark: CLPlacemark!
+                //                placemark = placemarks?[0]
+                //                var placeName: String!
+                //                if let locName = placemark.addressDictionary!["Name"] as? NSString {
+                //                    placeName = locName as String!
+                //                    print(placeName)
+                //                }
+                //
+                //                if let cityName = placemark.addressDictionary!["City"] as? NSString {
+                //                    placeName = placeName+" "+(cityName as String)
+                //                    print(placeName)
+                //                 }
+                //                annotation.title = placeName
+                //
+                //
+                //            })
+                //
+                
             }
             
         }
@@ -126,35 +141,42 @@ class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsContr
         pinView!.canShowCallout = false
         return pinView
     }
-    var toDelete:Bool = false
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if toDelete{
-        let selectedIndex = allPins.index(where:{
-            $0.longitude == view.annotation?.coordinate.longitude && $0.lattitude == view.annotation?.coordinate.latitude
-        })
-        let deletePin = allPins[selectedIndex!]
-
-        fetchedResultsController.managedObjectContext.delete(deletePin)
-        try? dataController.viewContext.save()
-        self.mapView.removeAnnotation(view.annotation!)
-        mapView.deselectAnnotation(view.annotation, animated: true)
+        if deleteMode{
+            fetchResults()
+            let selectedIndex = allPins.index(where:{
+                $0.longitude == view.annotation?.coordinate.longitude && $0.lattitude == view.annotation?.coordinate.latitude
+            })
+            let deletePin = allPins[selectedIndex!]
+            
+            fetchedResultsController.managedObjectContext.delete(deletePin)
+            try? dataController.viewContext.save()
+            self.mapView.removeAnnotation(view.annotation!)
+            mapView.deselectAnnotation(view.annotation, animated: true)
         }else{
+            let selectedIndex = allPins.index(where:{
+                $0.longitude == view.annotation?.coordinate.longitude && $0.lattitude == view.annotation?.coordinate.latitude
+            })
+            tappedPin = allPins[selectedIndex!]
             mapView.deselectAnnotation(view.annotation, animated: true)
             latt = view.annotation?.coordinate.latitude
             long = view.annotation?.coordinate.longitude
-            try? performSegue(withIdentifier: "PhotosView", sender: self)
+            performSegue(withIdentifier: "PhotosView", sender: self)
         }
     }
     var latt:Double!
     var long:Double!
+    var tappedPin:Pin!
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier! == "PhotosView"{
             if let photosController = segue.destination as? PhotosViewController{
                 photosController.lattitude = latt
                 photosController.longitude = long
+                photosController.dataController = dataController
+                photosController.pin = tappedPin
             }
         }
     }
-  
+    
 }
 

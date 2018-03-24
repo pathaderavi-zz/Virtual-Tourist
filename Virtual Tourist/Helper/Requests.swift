@@ -24,26 +24,26 @@ func getImages(lattitude:Double,longitude:Double,completionHandler:@escaping(_ s
     ]
     let session = URLSession.shared
     let request = URLRequest(url:createUrlFromParameters(parameters: parameters))
-
-    let task = session.dataTask(with: request) { (data, response, error) in
     
+    let task = session.dataTask(with: request) { (data, response, error) in
+        
         guard (error == nil) else{
             return
         }
-      
+        
         guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
             return
         }
-
+        
         let parsedResult:[String:AnyObject]!
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:AnyObject]
-    
+            
         }catch{
             fatalError("Cannot Serialize")
         }
         
-       // guard error for response code
+        // guard error for response code
         
         if let photos = parsedResult["photos"] as? [String:AnyObject] {
             if  photos["total"] as! String == "0" {
@@ -58,7 +58,8 @@ func getImages(lattitude:Double,longitude:Double,completionHandler:@escaping(_ s
                 }
             }
         }else{
-      
+            //Error Code
+           print(parsedResult)
         }
     }
     task.resume()
