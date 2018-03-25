@@ -76,6 +76,7 @@ class PhotosViewController:UIViewController,MKMapViewDelegate, UICollectionViewD
         }
     }
     @IBAction func newCollectionButton(_ sender: Any) {
+        count = 0
         loadingIndicators = []
         newCollectionButton.setTitle("New Collection", for: .normal)
         newCollectionButton.isEnabled = false
@@ -246,9 +247,7 @@ extension PhotosViewController{
                                     fatalError("Could Not Add")
                                 }
                             }
-                            if self.count == self.collectionView.visibleCells.count{
-                                self.count = 0
-                            }
+
                         }
                     }
                     
