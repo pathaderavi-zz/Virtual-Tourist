@@ -100,28 +100,7 @@ class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsContr
                 DispatchQueue.main.async {
                     self.mapView.addAnnotation(annotation)
                 }
-                
-                //            let name = CLGeocoder()
-                //            let loc = CLLocation(latitude: coordinates.latitude,longitude:coordinates.longitude)
-                //            name.reverseGeocodeLocation(loc, completionHandler: { (placemarks, error) in
-                //                var placemark: CLPlacemark!
-                //                placemark = placemarks?[0]
-                //                var placeName: String!
-                //                if let locName = placemark.addressDictionary!["Name"] as? NSString {
-                //                    placeName = locName as String!
-                //                    print(placeName)
-                //                }
-                //
-                //                if let cityName = placemark.addressDictionary!["City"] as? NSString {
-                //                    placeName = placeName+" "+(cityName as String)
-                //                    print(placeName)
-                //                 }
-                //                annotation.title = placeName
-                //
-                //
-                //            })
-                //
-                
+        
             }
             
         }
