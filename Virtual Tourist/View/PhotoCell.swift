@@ -13,5 +13,5 @@ class PhotoCell:UICollectionViewCell{
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var imageView: UIImageView!
-    
+    var deleteStatus:Bool = false
 }

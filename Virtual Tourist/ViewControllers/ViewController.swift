@@ -11,6 +11,7 @@ import MapKit
 import CoreData
 class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsControllerDelegate{
     var deleteMode:Bool = false
+    
     @IBAction func editButton(_ sender: Any) {
         bottomToolbar.isHidden = !bottomToolbar.isHidden
         if !bottomToolbar.isHidden{
@@ -139,6 +140,7 @@ class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsContr
             pinView!.annotation = annotation
         }
         pinView!.canShowCallout = false
+        pinView?.animatesDrop = true
         return pinView
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {

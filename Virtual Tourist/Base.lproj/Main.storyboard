@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Virtual Tourist-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Virtual_Tourist" customModuleProvider="target" sceneMemberID="viewController">
@@ -43,7 +43,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="I64-gs-bdQ">
+                    <navigationItem key="navigationItem" title="Virtual Tourist" id="I64-gs-bdQ">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="yRe-Wb-PId">
                             <connections>
                                 <action selector="editButton:" destination="BYZ-38-t0r" id="d1v-y0-XP4"/>
@@ -60,7 +60,7 @@
             </objects>
             <point key="canvasLocation" x="564" y="133"/>
         </scene>
-        <!--Photos View Controller-->
+        <!--Images-->
         <scene sceneID="sGP-MS-wGD">
             <objects>
                 <viewController storyboardIdentifier="PhotosView" id="jqP-Z9-tLm" customClass="PhotosViewController" customModule="Virtual_Tourist" customModuleProvider="target" sceneMemberID="viewController">
@@ -77,6 +77,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ya0-zf-mXh">
                                 <rect key="frame" x="0.0" y="637" width="375" height="30"/>
                                 <state key="normal" title="New Collection"/>
+                                <connections>
+                                    <action selector="newCollectionButton:" destination="jqP-Z9-tLm" eventType="touchUpInside" id="ZLo-uq-7bw"/>
+                                </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dLP-iX-ouV">
                                 <rect key="frame" x="0.0" y="190" width="375" height="439"/>
@@ -118,30 +121,49 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Pins to View" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="riJ-eU-PGt">
+                                <rect key="frame" x="0.0" y="190" width="375" height="439"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Ya0-zf-mXh" firstAttribute="bottom" secondItem="ZtR-Rg-WEG" secondAttribute="bottom" id="1pM-tx-pmp"/>
                             <constraint firstItem="Ya0-zf-mXh" firstAttribute="leading" secondItem="ZtR-Rg-WEG" secondAttribute="leading" id="2jM-AU-ZLH"/>
+                            <constraint firstItem="riJ-eU-PGt" firstAttribute="trailing" secondItem="ZtR-Rg-WEG" secondAttribute="trailing" id="9Ph-O2-R4k"/>
+                            <constraint firstItem="Ya0-zf-mXh" firstAttribute="top" secondItem="riJ-eU-PGt" secondAttribute="bottom" constant="8" id="9zE-2Y-IFF"/>
+                            <constraint firstItem="riJ-eU-PGt" firstAttribute="trailing" secondItem="ZtR-Rg-WEG" secondAttribute="trailing" id="CDT-KL-ibA"/>
+                            <constraint firstItem="riJ-eU-PGt" firstAttribute="top" secondItem="ZtR-Rg-WEG" secondAttribute="top" constant="126" id="DK1-8e-a9i"/>
                             <constraint firstItem="fDb-Vc-DkC" firstAttribute="leading" secondItem="dLP-iX-ouV" secondAttribute="leading" id="IPB-Fb-hf6"/>
                             <constraint firstItem="fDb-Vc-DkC" firstAttribute="top" secondItem="ZtR-Rg-WEG" secondAttribute="top" id="IRy-HE-CJ5"/>
+                            <constraint firstItem="riJ-eU-PGt" firstAttribute="leading" secondItem="ZtR-Rg-WEG" secondAttribute="leading" id="Pkp-FJ-Dwr"/>
                             <constraint firstItem="fDb-Vc-DkC" firstAttribute="trailing" secondItem="dLP-iX-ouV" secondAttribute="trailing" id="RAj-9z-53T"/>
+                            <constraint firstItem="riJ-eU-PGt" firstAttribute="leading" secondItem="ZtR-Rg-WEG" secondAttribute="leading" id="SCX-3q-qde"/>
                             <constraint firstItem="Ya0-zf-mXh" firstAttribute="bottom" secondItem="ZtR-Rg-WEG" secondAttribute="bottom" id="UCc-es-MuF"/>
                             <constraint firstItem="fDb-Vc-DkC" firstAttribute="trailing" secondItem="Ya0-zf-mXh" secondAttribute="trailing" id="ZMv-JW-hRG"/>
                             <constraint firstItem="dLP-iX-ouV" firstAttribute="top" secondItem="fDb-Vc-DkC" secondAttribute="bottom" constant="-2" id="ac5-iM-Zga"/>
+                            <constraint firstItem="ZtR-Rg-WEG" firstAttribute="bottom" secondItem="riJ-eU-PGt" secondAttribute="bottom" constant="38" id="cow-cz-QfX"/>
                             <constraint firstItem="dLP-iX-ouV" firstAttribute="leading" secondItem="ZtR-Rg-WEG" secondAttribute="leading" id="ei6-b0-ZcZ"/>
+                            <constraint firstItem="riJ-eU-PGt" firstAttribute="top" secondItem="ZtR-Rg-WEG" secondAttribute="top" constant="126" id="ofc-Tb-83P"/>
                             <constraint firstItem="Ya0-zf-mXh" firstAttribute="trailing" secondItem="ZtR-Rg-WEG" secondAttribute="trailing" id="rMF-B5-KSX"/>
                             <constraint firstItem="fDb-Vc-DkC" firstAttribute="leading" secondItem="Ya0-zf-mXh" secondAttribute="leading" id="rtA-1F-cOq"/>
+                            <constraint firstItem="riJ-eU-PGt" firstAttribute="top" secondItem="fDb-Vc-DkC" secondAttribute="bottom" constant="-2" id="rza-T9-gGJ"/>
                             <constraint firstItem="Ya0-zf-mXh" firstAttribute="top" secondItem="dLP-iX-ouV" secondAttribute="bottom" constant="8" id="sEg-0J-P8U"/>
                             <constraint firstItem="dLP-iX-ouV" firstAttribute="trailing" secondItem="ZtR-Rg-WEG" secondAttribute="trailing" id="wEe-A7-69o"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZtR-Rg-WEG"/>
                     </view>
-                    <navigationItem key="navigationItem" id="bnS-mh-aOT"/>
+                    <navigationItem key="navigationItem" title="Images" id="bnS-mh-aOT">
+                        <barButtonItem key="backBarButtonItem" title="Back to Map" id="ZaQ-c8-AwN"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="dLP-iX-ouV" id="I2f-7M-9Bu"/>
                         <outlet property="flowLayout" destination="8nf-eB-w17" id="D0o-Tr-eN0"/>
                         <outlet property="mapViewPhotos" destination="fDb-Vc-DkC" id="C3c-CN-dVB"/>
+                        <outlet property="newCollectionButton" destination="Ya0-zf-mXh" id="WUY-J8-46X"/>
+                        <outlet property="noPinsToViewLabel" destination="riJ-eU-PGt" id="XGY-Jp-ExJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lZe-3W-t3b" userLabel="First Responder" sceneMemberID="firstResponder"/>
