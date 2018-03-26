@@ -52,7 +52,10 @@ func getImages(lattitude:Double,longitude:Double,completionHandler:@escaping(_ s
             } else {
                 if let allPhotos = photos["photo"] as? [[String:AnyObject]]{
                     for pic in allPhotos {
-                        sample.append(pic["url_m"] as! String)
+                        if let url_medium = pic["url_m"] {
+                            sample.append(url_medium as! String)
+                        }
+                        
                     }
                     completionHandler(true,sample)
                 }

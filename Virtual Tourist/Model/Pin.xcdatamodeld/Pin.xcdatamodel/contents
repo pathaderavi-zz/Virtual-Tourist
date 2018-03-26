@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D47" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Images" representedClassName="Images" syncable="YES" codeGenerationType="class">
-        <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <relationship name="pin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pin" inverseName="photos" inverseEntity="Pin" syncable="YES"/>
     </entity>
     <entity name="Pin" representedClassName="Pin" syncable="YES" codeGenerationType="class">
@@ -10,7 +10,7 @@
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Images" inverseName="pin" inverseEntity="Images" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Images" positionX="171" positionY="-1" width="128" height="75"/>
+        <element name="Images" positionX="171" positionY="-1" width="128" height="73"/>
         <element name="Pin" positionX="-63" positionY="-16" width="128" height="88"/>
     </elements>
 </model>
